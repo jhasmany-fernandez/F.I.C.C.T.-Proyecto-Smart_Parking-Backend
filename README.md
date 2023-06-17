@@ -1,0 +1,2 @@
+"php": "^7.3|^8.0",
+"laravel/framework": "^8.75",
