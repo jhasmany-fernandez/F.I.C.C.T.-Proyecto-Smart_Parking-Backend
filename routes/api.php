@@ -36,12 +36,12 @@ Route::middleware(['auth:sanctum'])->post('/logout',[ApiAuthController::class, '
 /* ------------------------------------------------Vehiculos-------------------------------------------------------- */
 Route::get('/vehicules', [ApiVehiculesController::class, 'getvehicules'])->name('api.vehicules');
 Route::get('/vehicules/{usuario}', [ApiVehiculesController::class, 'getvehiculesUsuario'])->name('api.vehiculesUser');
+Route::post('/guardarvehiculo', [ApiVehiculesController::class, 'store'])->name('api.guardarVehiculo');
+Route::delete('/eliminarvehiculo/{vehicule}',[ApiVehiculesController::class,'destroy'])->name('api.eliminarVehiculo');
 
 /* ------------------------------------------------Notificaciones-------------------------------------------------------- */
-Route::get('/notificaion', [ApiNotificaionController::class, 'getnotificaion'])->name('api.notificacion');
-Route::get('/notificaion/{usuario}', [ApiNotificaionController::class, 'getnotificaionUsuario'])->name('api.notificacionUsuario');
-
-
+Route::get('/notificacion', [ApiNotificaionController::class, 'getnotificaion'])->name('api.notificacion');
+Route::get('/notificacion/{usuario}', [ApiNotificaionController::class, 'getnotificaionUsuario'])->name('api.notificacionUsuario');
 
 /* ------------------------------------------------Bitacora-------------------------------------------------------- */
 Route::get('/bitacora', [ApiBitacoraController::class, 'getbitacora'])->name('api.bitacora');
@@ -56,6 +56,5 @@ Route::get('/reporte/{vehiculo}', [ApiReporteController::class, 'getreporteVehic
 Route::get('/reserva', [ApiReservaController::class, 'getreserva'])->name('api.reserva');
 Route::get('/reserva/{vehiculo}', [ApiReservaController::class, 'getreservaVehiculo'])->name('api.reservaVehiculo');
 /* ------------------------------------------------Pago-------------------------------------------------------- */
-
 Route::get('/pago', [ApiPagoController::class, 'getpago'])->name('api.pago');
 Route::get('/pago/{reserva}', [ApiPagoController::class, 'getpagoReserva'])->name('api.pagoReserva');
