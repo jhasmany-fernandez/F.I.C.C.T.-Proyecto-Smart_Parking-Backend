@@ -2,10 +2,12 @@
 
 use App\Http\Controllers\api\ApiAuthController;
 use App\Http\Controllers\api\ApiBitacoraController;
+use App\Http\Controllers\api\ApiEspacioController;
 use App\Http\Controllers\api\ApiNotificaionController;
 use App\Http\Controllers\api\ApiPagoController;
 use App\Http\Controllers\api\ApiReporteController;
 use App\Http\Controllers\api\ApiReservaController;
+use App\Http\Controllers\api\ApiTarifaController;
 use App\Http\Controllers\api\ApiVehiculesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -47,10 +49,11 @@ Route::get('/notificacion/{usuario}', [ApiNotificaionController::class, 'getnoti
 Route::get('/bitacora', [ApiBitacoraController::class, 'getbitacora'])->name('api.bitacora');
 Route::get('/bitacora/{vehiculo}', [ApiBitacoraController::class, 'getbitacoraVehiculo'])->name('api.bitacotaVehiculo');
 
+/* ------------------------------------------------Tarifa-------------------------------------------------------- */
+Route::get('/tarifa', [ApiTarifaController::class, 'gettarifas'])->name('api.tarifa');
 
-/* ------------------------------------------------Reporte-------------------------------------------------------- */
-Route::get('/reporte', [ApiReporteController::class, 'getreporte'])->name('api.reporte');
-Route::get('/reporte/{vehiculo}', [ApiReporteController::class, 'getreporteVehiculo'])->name('api.reporteVehiculo');
+/* ------------------------------------------------Espacio-------------------------------------------------------- */
+Route::get('/espacio', [ApiEspacioController::class, 'getespacios'])->name('api.espacio');
 
 /* ------------------------------------------------Reserva-------------------------------------------------------- */
 Route::get('/reserva', [ApiReservaController::class, 'getreserva'])->name('api.reserva');

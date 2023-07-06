@@ -19,7 +19,7 @@ class ApiVehiculesController extends Controller
     public function store(Request $request)
     {
         // Validar los datos recibidos
-        ['id', 'placa', 'marca', 'color', 'tipo', 'user_id'];
+       
         $request->validate([
             'placa' => 'required',
             'marca' => 'required',

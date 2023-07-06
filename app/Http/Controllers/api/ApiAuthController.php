@@ -15,6 +15,7 @@ class ApiAuthController extends Controller
         $attr = $request->validate([
             'name'=>'required|string',
             'email'=>'required|email|unique:users,email',
+            'ci'=>'required|string',
             'password'=>'required|min:6|confirmed'
         ]);
         
@@ -22,6 +23,7 @@ class ApiAuthController extends Controller
         $user = User::create([
             'name'=>$attr['name'],
             'email'=>$attr['email'],
+            'ci'=>$attr['ci'],
             'password'=>bcrypt($attr['name']),
 
         ]);

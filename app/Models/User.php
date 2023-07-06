@@ -20,6 +20,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'ci',
         'password',
     ];
 
@@ -42,5 +43,15 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
     public $timestamps = false;
+
+    //relacion con vehiculo de uno a muchos
+     public function vehiculos(){
+        return $this->hasMany(Vehicle::class, 'user_id');
+     }
+
+    //relacion con notificacion de uno a muchos
+    public function notificaciones(){
+        return $this->hasMany(Notification::class,'user_id');
+    }
 
 }

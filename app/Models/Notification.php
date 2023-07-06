@@ -12,4 +12,9 @@ class Notification extends Model
     protected $fillable = ['id','descripcion', 'user_id'];
     public $timestamps = false;
 
+    //relacion con usuario de muchos a uno
+    public function user(){
+        return $this->belongsTo(User::class,'user_id','id' );
+    }
+
 }
