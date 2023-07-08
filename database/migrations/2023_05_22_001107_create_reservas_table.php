@@ -17,12 +17,11 @@ class CreateReservasTable extends Migration
         Schema::create('reservas', function (Blueprint $table) {
             $table->id();
             $table->dateTime('fecha_hora_ingreso_reserva');
-            $table->dateTime('fecha_hora_salida');
-            $table->dateTime('fecha_hora_salida_reserva');
-            $table->string('estado');
+            $table->dateTime('fecha_hora_salida')->nullable();
+            $table->dateTime('fecha_hora_salida_reserva');        
             $table->enum('status',[Reserva::PENDIENTE,Reserva::TRANSCURSO,Reserva::TERMINADO,])->default(Reserva::PENDIENTE);
-            $table->string('qrentrada');
-            $table->string('qrsalida');
+            $table->string('qrentrada')->nullable();
+            $table->string('qrsalida')->nullable();
             $table->unsignedBigInteger('vehicle_id')->nullable();
             $table->foreign('vehicle_id')->references('id')->on('vehicles')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('espacio_id')->nullable();

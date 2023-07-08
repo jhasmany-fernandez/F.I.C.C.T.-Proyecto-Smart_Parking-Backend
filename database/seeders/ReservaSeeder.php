@@ -18,7 +18,7 @@ class ReservaSeeder extends Seeder
             'fecha_hora_ingreso_reserva' => '2023-06-01 09:00:00',
             'fecha_hora_salida_reserva' => '2023-06-01 18:00:00',            
             'fecha_hora_salida' => '2023-06-01 18:00:00',
-            'estado' => 1,
+            
             'qrentrada' => 'null',
             'qrsalida' => 'null',            
             'espacio_id' => 1,
@@ -31,7 +31,7 @@ class ReservaSeeder extends Seeder
             'fecha_hora_ingreso_reserva' => '2023-06-02 10:30:00',
             'fecha_hora_salida_reserva' => '2023-06-02 17:30:00',            
             'fecha_hora_salida' => '2023-06-02 17:30:00',
-            'estado' => 2,
+          
             'qrentrada' => 'null',
             'qrsalida' => 'null',            
             'espacio_id' => 2,

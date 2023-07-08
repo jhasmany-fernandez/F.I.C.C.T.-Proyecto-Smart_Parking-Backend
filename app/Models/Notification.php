@@ -9,7 +9,7 @@ class Notification extends Model
 {
     use HasFactory;
     protected $table = 'notifications';
-    protected $fillable = ['id','descripcion', 'user_id'];
+    protected $fillable = ['id','titulo','descripcion', 'user_id'];
     public $timestamps = false;
 
     //relacion con usuario de muchos a uno

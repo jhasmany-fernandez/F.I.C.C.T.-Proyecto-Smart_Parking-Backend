@@ -40,6 +40,7 @@ Route::get('/vehicules', [ApiVehiculesController::class, 'getvehicules'])->name(
 Route::get('/vehicules/{usuario}', [ApiVehiculesController::class, 'getvehiculesUsuario'])->name('api.vehiculesUser');
 Route::post('/guardarvehiculo', [ApiVehiculesController::class, 'store'])->name('api.guardarVehiculo');
 Route::delete('/eliminarvehiculo/{vehicule}',[ApiVehiculesController::class,'destroy'])->name('api.eliminarVehiculo');
+Route::put('/updatevehicules/{vehicule}', [ApiVehiculesController::class, 'update'])->name('api.updatevehiculo');
 
 /* ------------------------------------------------Notificaciones-------------------------------------------------------- */
 Route::get('/notificacion', [ApiNotificaionController::class, 'getnotificaion'])->name('api.notificacion');
@@ -58,6 +59,8 @@ Route::get('/espacio', [ApiEspacioController::class, 'getespacios'])->name('api.
 /* ------------------------------------------------Reserva-------------------------------------------------------- */
 Route::get('/reserva', [ApiReservaController::class, 'getreserva'])->name('api.reserva');
 Route::get('/reserva/{vehiculo}', [ApiReservaController::class, 'getreservaVehiculo'])->name('api.reservaVehiculo');
+Route::post('/guardarReserva', [ApiReservaController::class, 'store'])->name('api.guardarReserva');
+
 /* ------------------------------------------------Pago-------------------------------------------------------- */
 Route::get('/pago', [ApiPagoController::class, 'getpago'])->name('api.pago');
 Route::get('/pago/{reserva}', [ApiPagoController::class, 'getpagoReserva'])->name('api.pagoReserva');

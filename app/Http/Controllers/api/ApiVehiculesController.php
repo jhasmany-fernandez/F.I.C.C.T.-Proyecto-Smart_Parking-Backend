@@ -59,6 +59,45 @@ class ApiVehiculesController extends Controller
     ], 200);
 }
 
+public function update(Request $request, $id)
+{
+    // Buscar el vehículo por su ID
+    $vehiculo = Vehicle::find($id);
+
+    // Verificar si se encontró el vehículo
+    if (!$vehiculo) {
+        return response()->json([
+            'message' => 'Vehículo no encontrado'
+        ], 404);
+    }
+
+    // Validar los datos recibidos
+    $request->validate([
+        'placa' => 'required',
+        'marca' => 'required',
+        'color' => 'required',
+        'tipo' => 'required',
+        'user_id' => 'required',
+        // Agrega aquí las validaciones para cada campo que esperas recibir
+    ]);
+
+    // Actualizar los valores del vehículo con los datos recibidos
+    $vehiculo->placa = $request->input('placa');
+    $vehiculo->marca = $request->input('marca');
+    $vehiculo->color = $request->input('color');
+    $vehiculo->tipo = $request->input('tipo');
+    $vehiculo->user_id = $request->input('user_id'); 
+
+    // Guardar los cambios en la base de datos
+    $vehiculo->save();
+
+    // Devolver una respuesta exitosa
+    return response()->json([
+        'message' => 'Vehículo actualizado exitosamente',
+        'vehiculo' => $vehiculo
+    ], 200);
+}
+
 
     
 }
