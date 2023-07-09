@@ -37,6 +37,138 @@ class ReservaSeeder extends Seeder
             'tarifa_id' => 1,           
             'vehicle_id' => 2
         ]);
+
+        Reserva::create([            
+            'fecha_hora_ingreso_reserva' => '2023-06-01 10:30:00',
+            'fecha_hora_salida_reserva' => '2023-06-01 17:30:00',            
+            'fecha_hora_salida' => '2023-06-02 17:30:00',
+            'status' => '3',
+            'qrentrada' => 'null',
+            'qrsalida' => 'null',            
+            'espacio_id' => 3,
+            'tarifa_id' => 2,           
+            'vehicle_id' => 2
+        ]);
+
+        Reserva::create([            
+            'fecha_hora_ingreso_reserva' => '2023-06-01 10:30:00',
+            'fecha_hora_salida_reserva' => '2023-06-01 17:30:00',            
+            'fecha_hora_salida' => '2023-06-02 17:30:00',
+            'status' => '3',
+            'qrentrada' => 'null',
+            'qrsalida' => 'null',            
+            'espacio_id' => 3,
+            'tarifa_id' => 2,           
+            'vehicle_id' => 2
+        ]);
+
+        Reserva::create([            
+            'fecha_hora_ingreso_reserva' => '2023-06-01 10:30:00',
+            'fecha_hora_salida_reserva' => '2023-06-01 17:30:00',            
+            'fecha_hora_salida' => '2023-06-02 17:30:00',
+            'status' => '3',
+            'qrentrada' => 'null',
+            'qrsalida' => 'null',            
+            'espacio_id' => 1,
+            'tarifa_id' => 1,           
+            'vehicle_id' => 2
+        ]);
+
+        Reserva::create([            
+            'fecha_hora_ingreso_reserva' => '2023-06-01 10:30:00',
+            'fecha_hora_salida_reserva' => '2023-06-01 17:30:00',            
+            'fecha_hora_salida' => '2023-06-02 17:30:00',
+            'status' => '2',
+            'qrentrada' => 'null',
+            'qrsalida' => 'null',            
+            'espacio_id' => 2,
+            'tarifa_id' => 1,           
+            'vehicle_id' => 2
+        ]);
+
+        Reserva::create([            
+            'fecha_hora_ingreso_reserva' => '2023-05-01 10:30:00',
+            'fecha_hora_salida_reserva' => '2023-05-01 17:30:00',            
+            'fecha_hora_salida' => '2023-06-02 17:30:00',
+            'status' => '2',
+            'qrentrada' => 'null',
+            'qrsalida' => 'null',            
+            'espacio_id' => 2,
+            'tarifa_id' => 1,           
+            'vehicle_id' => 2
+        ]);
+
+        Reserva::create([            
+            'fecha_hora_ingreso_reserva' => '2023-06-01 10:30:00',
+            'fecha_hora_salida_reserva' => '2023-06-01 17:30:00',            
+            'fecha_hora_salida' => '2023-06-02 17:30:00',
+            'status' => '3',
+            'qrentrada' => 'null',
+            'qrsalida' => 'null',            
+            'espacio_id' => 2,
+            'tarifa_id' => 1,           
+            'vehicle_id' => 2
+        ]);
+
+        Reserva::create([            
+            'fecha_hora_ingreso_reserva' => '2023-06-01 10:30:00',
+            'fecha_hora_salida_reserva' => '2023-06-01 17:30:00',            
+            'fecha_hora_salida' => '2023-06-02 17:30:00',
+            'status' => '3',
+            'qrentrada' => 'null',
+            'qrsalida' => 'null',            
+            'espacio_id' => 2,
+            'tarifa_id' => 3,           
+            'vehicle_id' => 1
+        ]);
+
+        Reserva::create([            
+            'fecha_hora_ingreso_reserva' => '2023-05-01 10:30:00',
+            'fecha_hora_salida_reserva' => '2023-05-01 17:30:00',            
+            'fecha_hora_salida' => '2023-06-02 17:30:00',
+            'status' => '3',
+            'qrentrada' => 'null',
+            'qrsalida' => 'null',            
+            'espacio_id' => 2,
+            'tarifa_id' => 3,           
+            'vehicle_id' => 1
+        ]);
+
+        Reserva::create([            
+            'fecha_hora_ingreso_reserva' => '2023-04-01 10:30:00',
+            'fecha_hora_salida_reserva' => '2023-04-01 17:30:00',            
+            'fecha_hora_salida' => '2023-06-02 17:30:00',
+            'status' => '3',
+            'qrentrada' => 'null',
+            'qrsalida' => 'null',            
+            'espacio_id' => 2,
+            'tarifa_id' => 3,           
+            'vehicle_id' => 1
+        ]);
+
+        Reserva::create([            
+            'fecha_hora_ingreso_reserva' => '2023-03-01 10:30:00',
+            'fecha_hora_salida_reserva' => '2023-03-01 17:30:00',            
+            'fecha_hora_salida' => '2023-06-02 17:30:00',
+            'status' => '3',
+            'qrentrada' => 'null',
+            'qrsalida' => 'null',            
+            'espacio_id' => 2,
+            'tarifa_id' => 3,           
+            'vehicle_id' => 1
+        ]);
+
+        Reserva::create([            
+            'fecha_hora_ingreso_reserva' => '2023-02-01 10:30:00',
+            'fecha_hora_salida_reserva' => '2023-02-01 17:30:00',            
+            'fecha_hora_salida' => '2023-06-02 17:30:00',
+            'status' => '3',
+            'qrentrada' => 'null',
+            'qrsalida' => 'null',            
+            'espacio_id' => 2,
+            'tarifa_id' => 3,           
+            'vehicle_id' => 1
+        ]);
         // Reserva::create([
         //     'fecha_hora_ingreso' => '2023-06-03 12:15:00',
         //     'fecha_hora_salida' => '2023-06-03 15:45:00',
