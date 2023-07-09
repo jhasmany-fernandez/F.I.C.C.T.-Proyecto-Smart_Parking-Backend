@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Reserva extends Model
 {
     use HasFactory;
-    const PENDIENTE=1; //SE HA GENERADO LA ORDEN PERO NO SE HA PAGADO (ESTA SE PONE POR DEFECTO)
-    const TRANSCURSO=2; //SE HA GENERADO Y SE HA PAGADO A ORDEN
-    const TERMINADO=3;
+    const PENDIENTE=1;  //reservado
+    const TRANSCURSO=2; // el vehiculo a esta en el parqueo 
+    const TERMINADO=3;   //la reserva acabo 
     
     protected $table = 'reservas';
     protected $fillable = [

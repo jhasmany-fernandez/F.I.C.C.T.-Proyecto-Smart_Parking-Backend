@@ -26,10 +26,9 @@ class ReservaSeeder extends Seeder
             'vehicle_id' => 1,
 
         ]);
-
         Reserva::create([            
-            'fecha_hora_ingreso_reserva' => '2023-06-02 10:30:00',
-            'fecha_hora_salida_reserva' => '2023-06-02 17:30:00',            
+            'fecha_hora_ingreso_reserva' => '2023-06-01 10:30:00',
+            'fecha_hora_salida_reserva' => '2023-06-01 17:30:00',            
             'fecha_hora_salida' => '2023-06-02 17:30:00',
           
             'qrentrada' => 'null',
@@ -38,7 +37,6 @@ class ReservaSeeder extends Seeder
             'tarifa_id' => 1,           
             'vehicle_id' => 2
         ]);
-
         // Reserva::create([
         //     'fecha_hora_ingreso' => '2023-06-03 12:15:00',
         //     'fecha_hora_salida' => '2023-06-03 15:45:00',

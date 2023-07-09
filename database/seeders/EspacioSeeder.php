@@ -16,11 +16,11 @@ class EspacioSeeder extends Seeder
     {
         Espacio::create([
             'numero' => '1',
-            'estado' => true,
+            'estado' => false,
         ]);
         Espacio::create([
             'numero' => '2',
-            'estado' => true,
+            'estado' => false,
         ]);
         Espacio::create([
             'numero' => '3',

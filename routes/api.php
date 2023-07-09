@@ -58,8 +58,11 @@ Route::get('/espacio', [ApiEspacioController::class, 'getespacios'])->name('api.
 
 /* ------------------------------------------------Reserva-------------------------------------------------------- */
 Route::get('/reserva', [ApiReservaController::class, 'getreserva'])->name('api.reserva');
+// Route::get('/reservatiempo', [ApiReservaController::class, 'getreservatiempo'])->name('api.reservatiempo');
 Route::get('/reserva/{vehiculo}', [ApiReservaController::class, 'getreservaVehiculo'])->name('api.reservaVehiculo');
 Route::post('/guardarReserva', [ApiReservaController::class, 'store'])->name('api.guardarReserva');
+
+Route::get('espacios-ocupados-libres', [ApiReservaController::class, 'obtenerEspacios']);
 
 /* ------------------------------------------------Pago-------------------------------------------------------- */
 Route::get('/pago', [ApiPagoController::class, 'getpago'])->name('api.pago');
