@@ -1,5 +1,7 @@
 <?php
 
+
+use App\Http\Controllers\MqttController;
 use App\Http\Controllers\api\ApiAuthController;
 use App\Http\Controllers\api\ApiBitacoraController;
 use App\Http\Controllers\api\ApiEspacioController;
@@ -9,9 +11,9 @@ use App\Http\Controllers\api\ApiReporteController;
 use App\Http\Controllers\api\ApiReservaController;
 use App\Http\Controllers\api\ApiTarifaController;
 use App\Http\Controllers\api\ApiVehiculesController;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -22,6 +24,8 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+Route::get('/messageMqtt/{parametro}', [MqttController::class, 'publishMessage']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
