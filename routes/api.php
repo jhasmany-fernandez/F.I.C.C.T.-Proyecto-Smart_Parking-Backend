@@ -27,16 +27,17 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/messageMqtt/{parametro}', [MqttController::class, 'publishMessage']);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 /* ------------------------------------------------Usuarios-------------------------------------------------------- */
 Route::post('/register', [ApiAuthController::class, 'register'])->name('api.register');
 Route::post('/login', [ApiAuthController::class, 'login'])->name('api.login');
-Route::get('/user', [ApiAuthController::class, 'user'])->name('api.user');
 Route::get('/usuarios', [ApiAuthController::class, 'usuarios'])->name('api.usuarios');
-Route::middleware(['auth:sanctum'])->post('/logout',[ApiAuthController::class, 'logout'])->name('api.logout');
+
+//RUTAS PROTEGIDAS
+Route::group(['middleware'=>['auth:sanctum']],function(){
+    Route::get('/user', [ApiAuthController::class, 'user'])->name('api.user');
+    Route::put('/user', [ApiAuthController::class, 'update'])->name('api.updateUser');
+    Route::post('/logout',[ApiAuthController::class, 'logout'])->name('api.logout');
+});
 
 
 /* ------------------------------------------------Vehiculos-------------------------------------------------------- */
