@@ -8,7 +8,7 @@ from pyqrcode import QRCode
 con = 1234
 
 # Generamos los QR
-while con <= 1240:
+while con <= 1245:
 
     #id = str('j') +  str(con)
     roster = con
