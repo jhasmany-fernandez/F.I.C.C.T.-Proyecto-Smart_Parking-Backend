@@ -68,6 +68,7 @@ Route::post('/guardarReserva', [ApiReservaController::class, 'store'])->name('ap
 
 Route::get('espacios-ocupados-libres', [ApiReservaController::class, 'obtenerEspacios']);
 
+Route::post('/generate-qr', [ApiReservaController::class, 'getqr'])->name('api.generate-qr');
 /* ------------------------------------------------Pago-------------------------------------------------------- */
 Route::get('/pago', [ApiPagoController::class, 'getpago'])->name('api.pago');
 Route::get('/pago/{reserva}', [ApiPagoController::class, 'getpagoReserva'])->name('api.pagoReserva');

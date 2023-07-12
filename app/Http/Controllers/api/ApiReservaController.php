@@ -9,6 +9,10 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+use Symfony\Component\Process\Exception\ProcessFailedException;
+use Symfony\Component\Process\Process;
+
+
 class ApiReservaController extends Controller
 {
     public function getreserva()
@@ -20,7 +24,7 @@ class ApiReservaController extends Controller
     //     $espacioId = 1;
     //     $fechaInicio = Carbon::createFromFormat('Y-m-d H:i:s', '2023-06-01 04:30:00');
     //     $fechaFin = Carbon::createFromFormat('Y-m-d H:i:s', '2023-06-01 08:59:00');
-    
+
     //     return Reserva::where('espacio_id', $espacioId)
     //         ->where(function ($query) use ($fechaInicio, $fechaFin) {
     //             $query->where(function ($query) use ($fechaInicio, $fechaFin) {
@@ -38,24 +42,25 @@ class ApiReservaController extends Controller
     //         })
     //         ->get();
     // }
-    
 
-   
-        public function obtenerEspacios(Request $request)
-        {
-            $horaInicio = $request->input('hora_inicio');
-            $horaFin = $request->input('hora_fin');
-    
-            $espaciosEstado = $this->obtenerEspaciosOcupadosLibres($horaInicio, $horaFin);
-    
-            return response()->json($espaciosEstado);
-        }
-   
 
-    public function obtenerEspaciosOcupadosLibres($horaInicio, $horaFin) {
+
+    public function obtenerEspacios(Request $request)
+    {
+        $horaInicio = $request->input('hora_inicio');
+        $horaFin = $request->input('hora_fin');
+
+        $espaciosEstado = $this->obtenerEspaciosOcupadosLibres($horaInicio, $horaFin);
+
+        return response()->json($espaciosEstado);
+    }
+
+
+    public function obtenerEspaciosOcupadosLibres($horaInicio, $horaFin)
+    {
         $espacios = Espacio::all();
         $espaciosEstado = [];
-    
+
         foreach ($espacios as $espacio) {
             $reservas = Reserva::where('espacio_id', $espacio->id)
                 ->where(function ($query) use ($horaInicio, $horaFin) {
@@ -63,17 +68,17 @@ class ApiReservaController extends Controller
                         $query->where('fecha_hora_ingreso_reserva', '>=', $horaInicio)
                             ->where('fecha_hora_ingreso_reserva', '<=', $horaFin);
                     })
-                    ->orWhere(function ($query) use ($horaInicio, $horaFin) {
-                        $query->where('fecha_hora_salida_reserva', '>', $horaInicio)
-                            ->where('fecha_hora_salida_reserva', '<=', $horaFin);
-                    })
-                    ->orWhere(function ($query) use ($horaInicio, $horaFin) {
-                        $query->where('fecha_hora_ingreso_reserva', '<', $horaInicio)
-                            ->where('fecha_hora_salida_reserva', '>', $horaFin);
-                    });
+                        ->orWhere(function ($query) use ($horaInicio, $horaFin) {
+                            $query->where('fecha_hora_salida_reserva', '>', $horaInicio)
+                                ->where('fecha_hora_salida_reserva', '<=', $horaFin);
+                        })
+                        ->orWhere(function ($query) use ($horaInicio, $horaFin) {
+                            $query->where('fecha_hora_ingreso_reserva', '<', $horaInicio)
+                                ->where('fecha_hora_salida_reserva', '>', $horaFin);
+                        });
                 })
                 ->get();
-    
+
             if ($reservas->isNotEmpty()) {
                 // El espacio está ocupado en el rango de tiempo especificado
                 $espaciosEstado[] = [
@@ -94,7 +99,7 @@ class ApiReservaController extends Controller
                 ];
             }
         }
-    
+
         return $espaciosEstado;
     }
 
@@ -118,5 +123,24 @@ class ApiReservaController extends Controller
         $reserva->save();
 
         return response()->json(['message' => 'Reserva creada correctamente'], 200);
+    }
+
+    public function getqr()
+    {
+        // $pythonScript = "helpers/recognizing-colors-ia.py";
+        $pythonScript = "E:/Xampp 2.0/htdocs/F.I.C.C.T.-Proyecto-Smart_Parking-Backend/public/helpers/IA-generar_Qr/GenQR.py";
+        $process = new Process(['python', $pythonScript]);
+        $process->run();
+        if (!$process->isSuccessful()) {
+            throw new ProcessFailedException($process);
+        }
+
+        $output = $process->getIncrementalOutput();
+        while (!$process->isTerminated()) {
+            $output .= $process->getIncrementalOutput();
+        }
+        $result = $output;
+
+        return response()->json(['result' => $result]);
     }
 }
