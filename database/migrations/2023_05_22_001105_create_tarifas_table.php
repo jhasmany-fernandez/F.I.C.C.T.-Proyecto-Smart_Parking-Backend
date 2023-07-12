@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePagosTable extends Migration
+class CreateTarifasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreatePagosTable extends Migration
      */
     public function up()
     {
-        Schema::create('pagos', function (Blueprint $table) {
-            $table->id();        
-            $table->double('monto');
-            $table->unsignedBigInteger('reserva_id')->nullable();
-            $table->foreign('reserva_id')->references('id')->on('reservas')->onDelete('cascade')->onUpdate('cascade');
+        Schema::create('tarifas', function (Blueprint $table) {
+            $table->id();
+            $table->time('tiempo');
+            $table->double('monto');          
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreatePagosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pagos');
+        Schema::dropIfExists('tarifas');
     }
 }
