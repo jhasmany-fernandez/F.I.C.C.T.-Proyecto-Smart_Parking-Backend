@@ -141,6 +141,7 @@ class ApiReservaController extends Controller
         }
         $result = $output;
 
+
         return response()->json(['result' => $result]);
     }
 }
