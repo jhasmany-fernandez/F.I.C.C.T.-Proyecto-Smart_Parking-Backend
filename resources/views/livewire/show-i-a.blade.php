@@ -39,7 +39,7 @@
         <button class="boton-animated" wire:click="readQR()">Leer QR</button>
         <button class="boton-animated" wire:click="generateQR()">Generar QR</button>
         <button class="boton-animated" wire:click="updateColor()">Reconocimiento de Colores</button>
-        <button class="boton-animated" wire:click="">Verificación de espacios</button>
+        <button class="boton-animated" wire:click="spacesVerification()">Verificación de espacios</button>
 
     </div>
 
