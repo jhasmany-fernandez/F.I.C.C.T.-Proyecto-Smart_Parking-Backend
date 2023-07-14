@@ -8,12 +8,11 @@ import logging
 def main():
     logging.basicConfig(level=logging.INFO)
 
-    args = parse_args()
+    #args = parse_args()
 
-    image_file = args.image_file
-    data_file = args.data_file
-    start_frame = args.start_frame
-    use_camera = args.camera
+    image_file = "helpers/ParkingLot/parking_lot/images/prueba7.jpeg"
+    data_file = "helpers/ParkingLot/parking_lot/data/coordinates_1.yml"
+    start_frame = 1
 
     #Para guardar la ubicación de los puntos en un archivo llamado coordinates_1.yml
     if image_file is not None:
@@ -26,10 +25,7 @@ def main():
     with open(data_file, "r") as data:
         points = yaml.safe_load(data)
 
-        if use_camera:
-            video_source = 3  # Utilizar la cámara predeterminada 3 para irius
-        else:
-            video_source = args.video_file
+        video_source = 3  # Utilizar la cámara predeterminada 3 para irius
 
         detector = MotionDetector(video_source, points, int(start_frame))
         detector.detect_motion()
@@ -43,14 +39,9 @@ def parse_args():
                         required=False,
                         help="Image file to generate coordinates on")
 
-    # parser.add_argument("--video",
-    #                     dest="video_file",
-    #                     required=True,
-    #                     help="Video file to detect motion on") #  Descomentar con video
-
     parser.add_argument("--data",
                         dest="data_file",
-                        required=True,
+                        required=False,
                         help="Data file to be used with OpenCV")
 
     parser.add_argument("--start-frame",
