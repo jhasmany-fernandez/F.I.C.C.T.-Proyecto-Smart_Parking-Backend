@@ -74,6 +74,8 @@ class MotionDetector:
 
             position_in_seconds = capture.get(open_cv.CAP_PROP_POS_MSEC) / 1000.0
 
+            should_exit = False
+
             for index, c in enumerate(coordinates_data):
                 status = self.__apply(grayed, index, c)
 
@@ -96,11 +98,11 @@ class MotionDetector:
                 #Imprime el resultado
                 if self.status_changed(self.prev_status, index, status):
                     if self.prev_status[index] and not status:
-                        print(f"{index + 1}o")
-                        sys.exit()
+                        print(f"{index + 1}")
+                        should_exit = True
                     elif not self.prev_status[index] and status:
                         print(f"{index + 1}l")
-                        sys.exit()
+                        should_exit = True
                     self.prev_status[index] = status
 
                 coordinates = self._coordinates(c)
@@ -109,7 +111,7 @@ class MotionDetector:
 
             open_cv.imshow(str(self.video), new_frame)
             k = open_cv.waitKey(1)
-            if k == ord("q"):
+            if k == ord("q") or should_exit:
                 break
         capture.release()
         open_cv.destroyAllWindows()
