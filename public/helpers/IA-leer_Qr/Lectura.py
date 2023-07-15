@@ -11,7 +11,7 @@ cap = cv2.VideoCapture(0)
 
 bandera = True
 # Empezamos
-while True:
+while bandera == True:
     # Leemos los frames
     ret, frame = cap.read()
 
@@ -61,7 +61,7 @@ while True:
             cv2.polylines(frame, [pts], True, (0, 255, 255), 5)
             cv2.putText(frame, 'A0' + str(info[2:]), (xi - 15, yi - 15), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 255), 2)
             print (str(info[2:]))
-            # bandera = False
+            bandera = False
         # Imprimimos
         #print(info)
 
