@@ -139,16 +139,16 @@ class ApiReservaController extends Controller
         $reserva->tarifa_id = $request->input('tarifa_id');
         $codigo = '12345';
         $url = $this->generateQr($codigo);
-        $reserva->qr = $url;
+        $reserva->reservaqr = $url;
         $reserva->save();
 
 
 
-        $request->validate([
-            'fecha_inicio' => 'required',
-            'fecha_fin' => 'required',
-            'personal_id' => 'required',
-        ]);
+        // $request->validate([
+        //     'fecha_inicio' => 'required',
+        //     'fecha_fin' => 'required',
+        //     // 'personal_id' => 'required',
+        // ]);
      
         
 
