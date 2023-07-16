@@ -7,7 +7,7 @@ j = 0
 estacionar = False
 
 #Inicia la camara en tiempo real
-cap = cv2.VideoCapture(3)
+cap = cv2.VideoCapture(2)
 
 while(1):
     ret, frame = cap.read()
@@ -15,7 +15,7 @@ while(1):
 
         hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
-        #Limite superior e inferior para el color negro        
+        #Limite superior e inferior para el color negro
         lower_black = np.array([0, 0, 0])  # Límite inferior de negro
         upper_black = np.array([179, 255, 30])  # Límite superior de negro
 
