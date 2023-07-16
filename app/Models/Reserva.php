@@ -21,6 +21,7 @@ class Reserva extends Model
         'status',
         'qrentrada',
         'qrsalida',
+        'reservaqr',
         'vehicle_id',
         'espacio_id',
         'tarifa_id'

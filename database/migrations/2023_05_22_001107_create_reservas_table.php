@@ -22,6 +22,7 @@ class CreateReservasTable extends Migration
             $table->enum('status',[Reserva::PENDIENTE,Reserva::TRANSCURSO,Reserva::TERMINADO,])->default(Reserva::PENDIENTE);
             $table->string('qrentrada')->nullable();
             $table->string('qrsalida')->nullable();
+            $table->string('reservaqr')->nullable();
             $table->unsignedBigInteger('vehicle_id')->nullable();
             $table->foreign('vehicle_id')->references('id')->on('vehicles')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('espacio_id')->nullable();

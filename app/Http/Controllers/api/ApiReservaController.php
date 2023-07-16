@@ -5,9 +5,26 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use App\Models\Espacio;
 use App\Models\Reserva;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+
+use Endroid\QrCode\QrCode;
+use Endroid\QrCode\Writer\PngWriter;
+
+use Illuminate\Support\Facades\Storage;
+use Endroid\QrCode\Builder\Builder;
+use Endroid\QrCode\Encoding\Encoding;
+use Endroid\QrCode\ErrorCorrectionLevel\ErrorCorrectionLevelHigh;
+use Endroid\QrCode\Label\Alignment\LabelAlignmentCenter;
+use Endroid\QrCode\Label\Font\NotoSans;
+use Endroid\QrCode\RoundBlockSizeMode\RoundBlockSizeModeMargin;
+use Endroid\QrCode\Color\Color;
+use Endroid\QrCode\ErrorCorrectionLevel\ErrorCorrectionLevelLow;
+use Endroid\QrCode\Label\Label;
+use Endroid\QrCode\Logo\Logo;
+use Endroid\QrCode\Writer\ValidationException;
+
+
+
 
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
@@ -120,10 +137,75 @@ class ApiReservaController extends Controller
         $reserva->vehicle_id = $request->input('vehicle_id');
         $reserva->espacio_id = $request->input('espacio_id');
         $reserva->tarifa_id = $request->input('tarifa_id');
+        $codigo = '12345';
+        $url = $this->generateQr($codigo);
+        $reserva->qr = $url;
         $reserva->save();
 
-        return response()->json(['message' => 'Reserva creada correctamente'], 200);
+
+
+        $request->validate([
+            'fecha_inicio' => 'required',
+            'fecha_fin' => 'required',
+            'personal_id' => 'required',
+        ]);
+     
+        
+
+        return response()->json([
+            'qr' => $url,
+            'message' => 'Reserva creada correctamente',
+        ], 200);
     }
+
+
+    public function testqr(Request $request)
+    {
+        $codigo = '12345';
+        $url = $this->generateQr($codigo);
+
+        return response()->json([
+            'qr' => $url,
+            'message' => 'Reserva creada correctamente',
+        ], 200);
+    }
+
+    public function generateQr($content)
+    {
+        //Libreria: https://github.com/endroid/qr-code
+
+        $qrCode = QrCode::create($content)
+            ->setEncoding(new Encoding('UTF-8'))
+            ->setErrorCorrectionLevel(new ErrorCorrectionLevelLow())
+            ->setSize(250)
+            ->setMargin(10)
+            ->setRoundBlockSizeMode(new RoundBlockSizeModeMargin())
+            ->setForegroundColor(new Color(0, 0, 0))
+            ->setBackgroundColor(new Color(255, 255, 255));
+
+        $writer = new PngWriter();
+        $result = $writer->write($qrCode);
+        $file = $result->getString();
+        $folder = 'qr/';
+
+        $fileName = uniqid();
+        $extension = '.png';
+        $url = $this->file_to_storage($file, $folder, $fileName, $extension);
+        return $url;
+    }
+    public function file_to_storage($file, $folder, $fileName, $extension  = null)
+    {
+        try {
+            $path = $folder . $fileName . $extension;
+            Storage::disk('public')->put($path, $file);
+            $url = "/storage/" . $path;
+            return $url;
+        } catch (\Throwable $th) {
+            return "";
+        }
+    }
+
+
 
     public function getqr()
     {

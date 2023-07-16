@@ -68,6 +68,7 @@ Route::get('/reserva', [ApiReservaController::class, 'getreserva'])->name('api.r
 // Route::get('/reservatiempo', [ApiReservaController::class, 'getreservatiempo'])->name('api.reservatiempo');
 Route::get('/reserva/{vehiculo}', [ApiReservaController::class, 'getreservaVehiculo'])->name('api.reservaVehiculo');
 Route::post('/guardarReserva', [ApiReservaController::class, 'store'])->name('api.guardarReserva');
+Route::post('/testqr', [ApiReservaController::class, 'testqr'])->name('api.testqr');
 
 Route::get('espacios-ocupados-libres', [ApiReservaController::class, 'obtenerEspacios']);
 
