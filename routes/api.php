@@ -11,6 +11,7 @@ use App\Http\Controllers\api\ApiReporteController;
 use App\Http\Controllers\api\ApiReservaController;
 use App\Http\Controllers\api\ApiTarifaController;
 use App\Http\Controllers\api\ApiVehiculesController;
+use App\Http\Controllers\api\ApiQrController;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -76,3 +77,5 @@ Route::post('/generate-qr', [ApiReservaController::class, 'getqr'])->name('api.g
 /* ------------------------------------------------Pago-------------------------------------------------------- */
 Route::get('/pago', [ApiPagoController::class, 'getpago'])->name('api.pago');
 Route::get('/pago/{reserva}', [ApiPagoController::class, 'getpagoReserva'])->name('api.pagoReserva');
+
+Route::post('/validateQr', [ApiQrController::class, 'validateQr']);

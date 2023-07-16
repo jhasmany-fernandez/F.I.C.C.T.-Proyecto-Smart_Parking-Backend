@@ -7,7 +7,7 @@ j = 0
 estacionar = False
 
 #Inicia la camara en tiempo real
-cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture(2)
 
 while(1):
     ret, frame = cap.read()
@@ -15,7 +15,7 @@ while(1):
 
         hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
-        #Limite superior e inferior para el color negro        
+        #Limite superior e inferior para el color negro
         lower_black = np.array([0, 0, 0])  # Límite inferior de negro
         upper_black = np.array([179, 255, 30])  # Límite superior de negro
 
@@ -39,7 +39,7 @@ while(1):
         
         #Las mascaras obtenidas se les hace notar en pantallas
         cv2.imshow("Camara", frame) #Se puede comentar
-        cv2.imshow("MascaraRojo", mascara_black)
+        cv2.imshow("MascaraNegro", mascara_black)
         cv2.imshow("MascaraAmarrillo", mascara_yellow)
 
         print(f"Porcentaje de píxeles en el color negro: {percentage_black:.2f}%")
