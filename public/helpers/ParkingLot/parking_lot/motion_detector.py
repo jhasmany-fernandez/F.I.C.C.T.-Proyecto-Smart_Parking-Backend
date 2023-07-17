@@ -60,14 +60,14 @@ class MotionDetector:
         times = [None] * len(coordinates_data)
 
          # Realizar solicitud GET
-        response = requests.get('http://tu-solicitud-get-aqui')
-        if response.status_code == 200:
-            # La solicitud fue exitosa
-            print("Solicitud exitosa")
-            print("Respuesta:", response.json())
-        else:
-            # Hubo un error en la solicitud
-            print("Error en la solicitud. Código de estado:", response.status_code)
+        # response = requests.get('http://tu-solicitud-get-aqui')
+        # if response.status_code == 200:
+        #     # La solicitud fue exitosa
+        #     print("Solicitud exitosa")
+        #     print("Respuesta:", response.json())
+        # else:
+        #     # Hubo un error en la solicitud
+        #     print("Error en la solicitud. Código de estado:", response.status_code)
 
         while capture.isOpened():
             result, frame = capture.read()
@@ -106,7 +106,6 @@ class MotionDetector:
                 #Imprime el resultado
                 if self.status_changed(self.prev_status, index, status):
                     if self.prev_status[index] and not status:
-                        print(f"{index + 1}o")
                         if index + 1 != 1:
                             response = requests.post('http://127.0.0.1:8000/api/espacioIncorrecto')
                             # Verificar el código de estado de la respuesta
