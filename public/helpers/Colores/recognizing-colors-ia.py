@@ -1,10 +1,10 @@
 import numpy as np
 import cv2
 import time
+import requests
 
 i = 0
 j = 0
-estacionar = False
 
 #Inicia la camara en tiempo real
 cap = cv2.VideoCapture(2)
@@ -53,22 +53,25 @@ while(1):
                     j = j + 1
                     # print(f"Porcentaje de píxeles en el color amarrillo: {percentage_yellow:.2f}%")
                     if(j == 3):
-                        estacionar = False
                         i = 0
                         j = 0
-                        print(estacionar)
-                        cv2.destroyAllWindows()
-                        break
+                        response = requests.post('http://127.0.0.1:8000/api/bienEstacionado')
+                        # Verificar el código de estado de la respuesta
+                        if response.status_code == 200:
+                            # La solicitud fue exitosa
+                            print("Solicitud exitosa")
+                            print("Respuesta:", response.json())
+                        else:
+                            # Hubo un error en la solicitud
+                            print("Error en la solicitud. Código de estado:", response.status_code)
                 else:
                     i = i + 1
                     # print(f"Porcentaje de píxeles en el color rojo: {percentage_red:.2f}%")
                     if(i == 3):
-                        estacionar = True
                         i = 0
                         j = 0
-                        print(estacionar)
-                        cv2.destroyAllWindows()
-                        break
+                        cv2.destroyAllWindows()#Se cierra el proceso, si no quiere que se cierre el proceso se comenta esto
+                        break #y esto
 
         k = cv2.waitKey(5)
         if k == 27:

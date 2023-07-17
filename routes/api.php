@@ -63,6 +63,9 @@ Route::get('/tarifa', [ApiTarifaController::class, 'gettarifas'])->name('api.tar
 
 /* ------------------------------------------------Espacio-------------------------------------------------------- */
 Route::get('/espacio', [ApiEspacioController::class, 'getespacios'])->name('api.espacio');
+Route::post('/bienEstacionado', [ApiEspacioController::class, 'bienEstacionado']);
+Route::post('/espacioLibre', [ApiEspacioController::class, 'espacioLibre']);
+Route::post('/espacioIncorrecto', [ApiEspacioController::class, 'espacioIncorrecto']);
 
 /* ------------------------------------------------Reserva-------------------------------------------------------- */
 Route::get('/reserva', [ApiReservaController::class, 'getreserva'])->name('api.reserva');
@@ -77,5 +80,7 @@ Route::post('/generate-qr', [ApiReservaController::class, 'getqr'])->name('api.g
 /* ------------------------------------------------Pago-------------------------------------------------------- */
 Route::get('/pago', [ApiPagoController::class, 'getpago'])->name('api.pago');
 Route::get('/pago/{reserva}', [ApiPagoController::class, 'getpagoReserva'])->name('api.pagoReserva');
+Route::post('/guardarPago', [ApiPagoController::class, 'guardarPago'])->name('api.guardarPago');
+
 
 Route::post('/validateQr', [ApiQrController::class, 'validateQr']);

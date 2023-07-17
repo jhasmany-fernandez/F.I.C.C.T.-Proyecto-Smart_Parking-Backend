@@ -1,9 +1,9 @@
-import sys
 import cv2 as open_cv
 import numpy as np
 import logging
 from drawing_utils import draw_contours
 from colors import COLOR_GREEN, COLOR_BLUE, COLOR_WHITE
+import requests
 
 #clase para el detector del estado del espacio(libre, ocupado)dibujando los rectangulos haciendo
 #el uso del archivo generado llamado coordiantes_1.yml
@@ -59,6 +59,16 @@ class MotionDetector:
         statuses = self.prev_status
         times = [None] * len(coordinates_data)
 
+         # Realizar solicitud GET
+        # response = requests.get('http://tu-solicitud-get-aqui')
+        # if response.status_code == 200:
+        #     # La solicitud fue exitosa
+        #     print("Solicitud exitosa")
+        #     print("Respuesta:", response.json())
+        # else:
+        #     # Hubo un error en la solicitud
+        #     print("Error en la solicitud. Código de estado:", response.status_code)
+
         while capture.isOpened():
             result, frame = capture.read()
             if frame is None:
@@ -73,8 +83,6 @@ class MotionDetector:
             logging.debug("new_frame: %s", new_frame)
 
             position_in_seconds = capture.get(open_cv.CAP_PROP_POS_MSEC) / 1000.0
-
-            should_exit = False
 
             for index, c in enumerate(coordinates_data):
                 status = self.__apply(grayed, index, c)
@@ -98,11 +106,26 @@ class MotionDetector:
                 #Imprime el resultado
                 if self.status_changed(self.prev_status, index, status):
                     if self.prev_status[index] and not status:
-                        print(f"{index + 1}")
-                        should_exit = True
+                        if index + 1 != 1:
+                            response = requests.post('http://127.0.0.1:8000/api/espacioIncorrecto')
+                            # Verificar el código de estado de la respuesta
+                            if response.status_code == 200:
+                                # La solicitud fue exitosa
+                                print("Solicitud exitosa")
+                                print("Respuesta:", response.json())
+                            else:
+                                # Hubo un error en la solicitud
+                                print("Error en la solicitud. Código de estado:", response.status_code)
                     elif not self.prev_status[index] and status:
-                        print(f"{index + 1}l")
-                        should_exit = True
+                        response = requests.post('http://127.0.0.1:8000/api/espacioLibre')
+                        # Verificar el código de estado de la respuesta
+                        if response.status_code == 200:
+                            # La solicitud fue exitosa
+                            print("Solicitud exitosa")
+                            print("Respuesta:", response.json())
+                        else:
+                            # Hubo un error en la solicitud
+                            print("Error en la solicitud. Código de estado:", response.status_code)
                     self.prev_status[index] = status
 
                 coordinates = self._coordinates(c)
@@ -111,7 +134,7 @@ class MotionDetector:
 
             open_cv.imshow(str(self.video), new_frame)
             k = open_cv.waitKey(1)
-            if k == ord("q") or should_exit:
+            if k == ord("q"):
                 break
         capture.release()
         open_cv.destroyAllWindows()
