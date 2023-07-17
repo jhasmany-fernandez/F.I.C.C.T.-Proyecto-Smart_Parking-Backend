@@ -149,8 +149,8 @@ class ApiReservaController extends Controller
         //     'fecha_fin' => 'required',
         //     // 'personal_id' => 'required',
         // ]);
-     
-        
+
+
 
         return response()->json([
             'qr' => $url,
@@ -159,9 +159,9 @@ class ApiReservaController extends Controller
     }
 
 
-    public function testqr(Request $request)
+    public function testqr()
     {
-        $codigo = '12345';
+        $codigo = uniqid();
         $url = $this->generateQr($codigo);
 
         return response()->json([
