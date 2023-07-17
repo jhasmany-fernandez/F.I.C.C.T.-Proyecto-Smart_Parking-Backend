@@ -63,6 +63,9 @@ Route::get('/tarifa', [ApiTarifaController::class, 'gettarifas'])->name('api.tar
 
 /* ------------------------------------------------Espacio-------------------------------------------------------- */
 Route::get('/espacio', [ApiEspacioController::class, 'getespacios'])->name('api.espacio');
+Route::post('/bienEstacionado', [ApiEspacioController::class, 'bienEstacionado']);
+Route::post('/espacioLibre', [ApiEspacioController::class, 'espacioLibre']);
+Route::post('/espacioIncorrecto', [ApiEspacioController::class, 'espacioIncorrecto']);
 
 /* ------------------------------------------------Reserva-------------------------------------------------------- */
 Route::get('/reserva', [ApiReservaController::class, 'getreserva'])->name('api.reserva');
